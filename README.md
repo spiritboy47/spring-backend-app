@@ -149,18 +149,7 @@ Handles:
 ### rollback.sh
 Handles:
 - Rollback process in case of deployment failure
-
----
-
-## Future Improvements
-
-- Kubernetes deployment
-- SonarQube integration
-- Blue-Green deployment
-- Prometheus monitoring
-- Grafana dashboards
-- Automated rollback strategy
-
+  
 ---
 
 ## Author
