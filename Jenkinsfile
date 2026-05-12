@@ -48,6 +48,10 @@ pipeline {
         stage('Deploy Container') {
             steps {
                 sh './scripts/deploy.sh'
+
+                echo 'Waiting for application to start...'
+
+                sh 'sleep 20'
             }
         }
 
