@@ -39,26 +39,21 @@ pipeline {
             }
         }
 
+        stage('Prepare Scripts') {
+            steps {
+                sh 'chmod +x scripts/*.sh'
+            }
+        }
+
         stage('Deploy Container') {
             steps {
-                sh '''
-                    docker stop $CONTAINER_NAME || true
-                    docker rm $CONTAINER_NAME || true
-
-                    docker run -d \
-                    --name $CONTAINER_NAME \
-                    -p 8080:8080 \
-                    $IMAGE_NAME
-                '''
+                sh './scripts/deploy.sh'
             }
         }
 
         stage('Health Check') {
             steps {
-                sh '''
-                    sleep 20
-                    curl -f http://localhost:8080 || exit 1
-                '''
+                sh './scripts/health-check.sh'
             }
         }
     }
@@ -71,6 +66,7 @@ pipeline {
 
         failure {
             echo 'Pipeline failed!'
+            sh './scripts/rollback.sh'
         }
     }
 }

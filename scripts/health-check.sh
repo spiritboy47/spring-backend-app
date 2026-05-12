@@ -1,6 +1,6 @@
 #!/bin/bash
 
-URL="http://localhost:8080/actuator/health"
+URL="http://localhost:8090/actuator/health"
 
 STATUS=$(curl -s $URL)
 
